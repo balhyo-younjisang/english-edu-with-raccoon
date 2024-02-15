@@ -1,3 +1,5 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:english_edu/pages/word/checked_argument.dart';
 import 'package:english_edu/pages/word/word_argument.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,37 +8,129 @@ import 'package:google_fonts/google_fonts.dart';
 class WordPage extends StatelessWidget {
   WordPage({super.key});
 
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+  final Map<String, List<bool>> isChecked = {
+    "2": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "3": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "4": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "5": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "6": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "7": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "8": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ],
+    "9": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+    ]
+  };
+
   final Map<String, List<String>> data = {
     "2": [
-      "Mother 엄마",
-      "Father 아빠",
-      "Brother 형제",
-      "Sister 자매",
-      "Grandmother 할머니",
-      "Grandfather 할아버지",
-      "Aunt 이모",
-      "Uncle 삼촌",
-      "Cousin 사촌"
+      "Mother 어머니",
+      "Father 아버지",
+      "Brother 남동생",
+      "Sister_in-law 새언니,형수",
+      "Grandmother 진/외조할머니",
+      "Grandfather 진/외조할아버지",
+      "Aunt 고모,이모,삼촌어머니",
+      "Uncle 고모,이모,이모아버지",
+      "Cousin 사촌,친척"
     ],
     "3": [
       "Sunny 화창한",
-      "Rainy 비가 오는",
+      "Rainy 비가_오는",
       "Cloudy 흐린",
-      "Windy 바람이 부는",
-      "Stormy 태풍이 부는",
-      "Snowy 눈이 오는",
-      "Foggy 안개가 낀",
+      "Windy 바람이_부는",
+      "Stormy 태풍이_부는",
+      "Snowy 눈이_오는",
+      "Foggy 안개가_낀",
       "Humid 습한",
       "Chilly 쌀쌀한"
     ],
     "4": [
       "Tiger 호랑이",
-      "Wolf 늑대",
+      "Wolf 승냥이",
       "Pig 돼지",
       "Cat 고양이",
-      "Panda 판다",
-      "Dolphin 돌고래",
-      "Zebra 얼룩말",
+      "Panda 고양이곰",
+      "Dolphin 곱등어",
+      "Zebra 줄말",
       "Dog 개",
       "Fish 물고기"
     ],
@@ -44,49 +138,49 @@ class WordPage extends StatelessWidget {
       "Soccer 축구",
       "Swim 수영",
       "Tennis 테니스",
-      "Basketball 농구",
+      "Basketball 롱구",
       "Baseball 야구",
       "Fencing 펜싱",
-      "Bowling 볼링",
-      "Skate 스케이트",
-      "League of Legend 리그오브레전드"
+      "Bowling 보링",
+      "Skate 스케트",
+      "League_of_Legend 리그_오브_레전드"
     ],
     "6": [
-      "Back 은행",
+      "Bank 저금소",
       "Shop 가게",
       "School 학교",
       "Restaurant 식당",
-      "Post Office 우체국",
+      "Post_Office 체신소",
       "Hospital 병원",
-      "Airport 공항",
+      "Airport 비행장",
       "Bus 버스",
       "Taxi 택시"
     ],
     "7": [
-      "녹색 green",
-      "파란색 blue",
-      "빨간색 red",
-      "보라색 purple",
-      "갈색 brown",
-      "주황색 orange",
-      "흰색 white",
-      "검정색 black",
-      "노란색 yellow",
+      "green 록색",
+      "blue 청색",
+      "red 홍색",
+      "purple 보라색",
+      "brown 밤색",
+      "orange 감색",
+      "white 흰색",
+      "black 검정색",
+      "yellow 노란색",
     ],
     "8": [
-      "7:00 It's seven or It's seven o'clock",
-      "7:05 It's seven - oh- five",
-      "7:10 It's seven ten",
-      "7:15 It's seven fifteen",
-      "7:20 It's seven twenty",
-      "7:30 It's seven thirty",
-      "7:40 It's seven forty",
-      "7:45 It's seven forty five",
-      "7:50 It's seven fifty",
+      "7:00 It's_seven_or_It's_seven_o'clock",
+      "7:05 It's_seven_-_oh-_five",
+      "7:10 It's_seven_ten",
+      "7:15 It's_seven_fifteen",
+      "7:20 It's_seven_twenty",
+      "7:30 It's_seven_thirty",
+      "7:40 It's_seven_forty",
+      "7:45 It's_seven_forty_five",
+      "7:50 It's_seven_fifty",
     ],
     "9": [
       "bread 빵",
-      "rice 쌀, 밥",
+      "rice 쌀,밥",
       "noodle 국수",
       "meat 고기",
       "pumpkin 호박",
@@ -109,22 +203,41 @@ class WordPage extends StatelessWidget {
   };
 
   void showDefaultDialog(String data) {
+    String title = data.split(" ")[0].replaceAll("_", " ").toUpperCase();
+    String content = data.split(" ")[1].replaceAll("_", " ");
+
     Get.defaultDialog(
-      title: data.split(" ")[0].toUpperCase(),
-      content: Text(data.split(" ")[1]),
-      textConfirm: 'confirm',
-      confirmTextColor: Colors.white,
-      onConfirm: Get.back,
-    );
+        title: title,
+        content: Text(content),
+        textConfirm: '듣기',
+        textCancel: "확인",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          if (content.contains("seven") || title.contains("월")) {
+            _assetsAudioPlayer.open(
+              Audio("assets/audios/${content.toLowerCase()}.mp3"),
+              loopMode: LoopMode.none,
+            );
+          } else {
+            _assetsAudioPlayer.open(
+              Audio("assets/audios/${title.toLowerCase()}.mp3"),
+              loopMode: LoopMode.none,
+            );
+          }
+
+          _assetsAudioPlayer.play();
+        });
   }
 
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as WordArgument;
     late List<String> words;
+    late List<bool> isCheckedInDay;
 
     if (data[args.day] != null) {
       words = data[args.day]!;
+      isCheckedInDay = isChecked[args.day]!;
     }
 
     return SafeArea(
@@ -136,7 +249,7 @@ class WordPage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, CheckedArgument(isCheckedInDay));
                   },
                   child: Text(
                     "<",
@@ -167,12 +280,16 @@ class WordPage extends StatelessWidget {
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
                   showDefaultDialog(words[index]);
+                  isCheckedInDay[index] = true;
                 },
                 child: Card(
                   child: Container(
                     alignment: Alignment.center,
                     child: Text(
-                      words[index].split(" ")[0].toUpperCase(),
+                      words[index]
+                          .split(" ")[0]
+                          .replaceAll("_", " ")
+                          .toUpperCase(),
                       style: GoogleFonts.nerkoOne(),
                     ),
                   ),

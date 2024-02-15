@@ -7,7 +7,7 @@ import 'package:english_edu/pages/word/alphabet.dart';
 
 final routes = {
   "/": (BuildContext context) => const MainPage(),
-  "/course/1": (BuildContext context) => const CourseFirstPage(),
+  "/course/1": (BuildContext context) => CourseFirstPage(),
   "/course/2": (BuildContext context) => const CourseSecondPage(),
   "/word": (BuildContext context) => WordPage(),
   "/alphabet": (BuildContext context) => AlphabetPage(),

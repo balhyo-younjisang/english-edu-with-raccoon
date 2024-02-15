@@ -1,3 +1,5 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:english_edu/pages/word/checked_argument.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,6 +7,35 @@ import 'package:google_fonts/google_fonts.dart';
 class AlphabetPage extends StatelessWidget {
   AlphabetPage({super.key});
 
+  final AssetsAudioPlayer _assetsAudioPlayer = AssetsAudioPlayer.newPlayer();
+  final List<bool> isChecked = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
   final List<String> _alphabets = [
     "a",
     "b",
@@ -67,13 +98,22 @@ class AlphabetPage extends StatelessWidget {
     List<String> examples = example[alphabet]!;
 
     Get.defaultDialog(
-      title: "${alphabet.toUpperCase()} $alphabet",
-      content: Column(
-          children: [Text(examples[0]), Text(examples[1]), Text(examples[2])]),
-      textConfirm: 'confirm',
-      confirmTextColor: Colors.white,
-      onConfirm: Get.back,
-    );
+        title: "${alphabet.toUpperCase()} $alphabet",
+        content: Column(children: [
+          Text(examples[0]),
+          Text(examples[1]),
+          Text(examples[2])
+        ]),
+        textConfirm: '듣기',
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          _assetsAudioPlayer.open(
+            Audio("assets/audios/${alphabet.toLowerCase()}.mp3"),
+            loopMode: LoopMode.none,
+          );
+
+          _assetsAudioPlayer.play();
+        });
   }
 
   @override
@@ -87,7 +127,7 @@ class AlphabetPage extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context, CheckedArgument(isChecked));
                   },
                   child: Text(
                     "<",
@@ -118,6 +158,7 @@ class AlphabetPage extends StatelessWidget {
               itemBuilder: (context, index) => InkWell(
                 onTap: () {
                   showDefaultDialog(_alphabets[index]);
+                  isChecked[index] = true;
                 },
                 child: Card(
                   child: Container(

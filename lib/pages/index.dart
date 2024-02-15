@@ -15,7 +15,7 @@ class MainPage extends StatelessWidget {
               SizedBox(
                 child: Column(
                   children: [
-                    Text("ENGLISH",
+                    Text("RFD ENGLISH",
                         style: GoogleFonts.nerkoOne(
                             color: Colors.white,
                             fontSize: 70,
