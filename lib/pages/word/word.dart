@@ -215,12 +215,12 @@ class WordPage extends StatelessWidget {
         onConfirm: () {
           if (content.contains("seven") || title.contains("월")) {
             _assetsAudioPlayer.open(
-              Audio("assets/audios/${content.toLowerCase()}.mp3"),
+              Audio.network("assets/audios/${content.toLowerCase()}.mp3"),
               loopMode: LoopMode.none,
             );
           } else {
             _assetsAudioPlayer.open(
-              Audio("assets/audios/${title.toLowerCase()}.mp3"),
+              Audio.network("assets/audios/${title.toLowerCase()}.mp3"),
               loopMode: LoopMode.none,
             );
           }
